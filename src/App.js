@@ -1,25 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Provider } from 'react-redux'
 import './App.css';
+import GetCountry from './component/GetCountry';
+import store from './store';
+import '../node_modules/react-vis/dist/style.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <header className="App-header">
+          Hello corona
+        </header>
+        <div className='App-cases'>
+          <GetCountry />
+        </div>
+      </div>
+    </Provider>
   );
 }
 
