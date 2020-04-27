@@ -1,0 +1,53 @@
+{
+    "parser": "babel-eslint",
+    "extends": ["airbnb", "airbnb/hooks"],
+    "plugins": ["react", "jsx-a11y", "import", "react-hooks"],
+    "rules": {
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "react/jsx-filename-extension": ["off"],
+        "linebreak-style": ["off"],
+        "jsx-a11y/accessible-emoji": ["off"],
+        "no-undef": ["warn"],
+        "array-callback-return": ["off"],
+        "jsx-quotes": ["off"],
+        "consistent-return": ["off"],
+        "no-shadow": ["off"],
+        "prefer-const": ["off"],
+        "arrow-parens": ["off"],
+        "arrow-body-style": ["off"],
+        "no-param-reassign": ["off"],
+        "import/prefer-default-export": ["off"],
+        "implicit-arrow-linebreak": ["off"],
+        "object-curly-newline": ["off"],
+        "import/no-extraneous-dependencies": ["off"],
+        "react/sort-comp": ["off"],
+        "react/prefer-stateless-function": ["off"],
+        "react/no-unescaped-entities": ["off"],
+        "react/jsx-props-no-spreading": ["off"],
+        "react/no-array-index-key": ["off"],
+        "react/button-has-type": ["off"],
+        "no-console": ["off"],
+        "no-use-before-define": ["off"],
+        "react/prop-types": ["off"],
+        "comma-dangle": ["off"],
+        "no-underscore-dangle": ["off"],
+        "no-unused-vars": ["warn", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
+        "semi": ["off"],
+        "max-len": ["off"],
+        "jsx-a11y/label-has-associated-control": [ 2, {
+            "labelComponents": ["CustomInputLabel"],
+            "labelAttributes": ["label"],
+            "controlComponents": ["CustomInput"],
+            "depth": 3
+        }]
+    },
+    "globals": {
+        "fetch": false
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    }
+}
+
