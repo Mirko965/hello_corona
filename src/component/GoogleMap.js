@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState, useCallback } from 'react'
 
 const GOOGLE_MAP_API_KEY = 'AIzaSyBASSvwAm6ZV_X_6dnnCsgMycITw3a2xn8';
 
-const GoogleMap = ({ options, links }) => {
+const GoogleMap = ({ options, links, onClick, addMarkers }) => {
   const googleMapRef = useRef();
   const [map, setMap] = useState()
 
@@ -10,7 +10,7 @@ const GoogleMap = ({ options, links }) => {
     width: '100%',
     height: '40rem',
   };
-  const content = (link) => {
+  /*  const content = (link) => {
     return `
             <div>
               <h3><b>${link.title}</b></h3>
@@ -21,8 +21,8 @@ const GoogleMap = ({ options, links }) => {
               <p><b>Recovered</b>: ${link.recovered}</p>
             </div>
            `
-  }
-  const addMarkers = (map) => {
+  } */
+  /*  const addMarkers = (map) => {
     if (links) {
       return links.map((link) => {
         const infoWindow = new window.google.maps.InfoWindow({
@@ -34,13 +34,12 @@ const GoogleMap = ({ options, links }) => {
           title: link.title,
           icon: 'http://maps.google.com/mapfiles/ms/icons/blue.png'
         })
-        marker.addListener('click', () => {
-          map.setZoom(6);
-          map.setCenter(marker.getPosition());
-        });
+        map.setCenter(options.center);
+        map.setZoom(options.zoom);
+        marker.addListener('click', () => onClick());
         marker.addListener('mouseover', () => {
-          /* map.setZoom(6); */
-          /* map.setCenter(marker.getPosition()); */
+          // map.setZoom(6);
+          // map.setCenter(marker.getPosition());
           infoWindow.open(map, marker);
         })
         marker.addListener('mouseout', () => {
@@ -48,11 +47,16 @@ const GoogleMap = ({ options, links }) => {
         })
       })
     }
-  }
+  } */
 
   // useEffect Hook
+
   useEffect(() => {
-    const createGoogleMap = () => setMap(new window.google.maps.Map(googleMapRef.current, options));
+    const option = {
+      center: { lat: 0, lng: 0 },
+      zoom: 2,
+    }
+    const createGoogleMap = () => setMap(new window.google.maps.Map(googleMapRef.current, option));
     if (!window.google) {
       const script = document.createElement('script');
       script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}`
@@ -61,7 +65,7 @@ const GoogleMap = ({ options, links }) => {
       return () => script.removeEventListener('load', createGoogleMap)
     }
     createGoogleMap()
-  }, [options]);
+  }, []);
   if (map) addMarkers(map)
 
   return (

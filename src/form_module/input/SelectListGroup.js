@@ -8,7 +8,7 @@ const SelectListGroup = (
   options = [],
   info,
   onChange,
-  disabled = true,
+  disabled = false,
   error,
   focus,
   blur,

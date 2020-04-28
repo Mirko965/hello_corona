@@ -14,13 +14,8 @@ const useAxios = (url) => {
     } finally {
       setState(state => ({ ...state, loading: false }));
     }
-  }, [url])
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  return [state];
+  }, [state, url])
+  return [state, fetchData];
 }
 
 export default useAxios
