@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 
 const GOOGLE_MAP_API_KEY = 'AIzaSyBASSvwAm6ZV_X_6dnnCsgMycITw3a2xn8';
 
-const GoogleMap = ({ options, links, onClick, addMarkers }) => {
+const GoogleMap = ({ options, links, onClick }) => {
   const googleMapRef = useRef();
   const [map, setMap] = useState()
 
@@ -10,7 +10,7 @@ const GoogleMap = ({ options, links, onClick, addMarkers }) => {
     width: '100%',
     height: '40rem',
   };
-  /*  const content = (link) => {
+  const content = (link) => {
     return `
             <div>
               <h3><b>${link.title}</b></h3>
@@ -21,10 +21,10 @@ const GoogleMap = ({ options, links, onClick, addMarkers }) => {
               <p><b>Recovered</b>: ${link.recovered}</p>
             </div>
            `
-  } */
-  /*  const addMarkers = (map) => {
+  }
+  const addMarkers = (map) => {
     if (links) {
-      return links.map((link) => {
+      return links.map(link => {
         const infoWindow = new window.google.maps.InfoWindow({
           content: content(link)
         });
@@ -36,7 +36,7 @@ const GoogleMap = ({ options, links, onClick, addMarkers }) => {
         })
         map.setCenter(options.center);
         map.setZoom(options.zoom);
-        marker.addListener('click', () => onClick());
+        marker.addListener('click', () => onClick(marker));
         marker.addListener('mouseover', () => {
           // map.setZoom(6);
           // map.setCenter(marker.getPosition());
@@ -47,7 +47,7 @@ const GoogleMap = ({ options, links, onClick, addMarkers }) => {
         })
       })
     }
-  } */
+  }
 
   // useEffect Hook
 

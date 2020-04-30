@@ -6,6 +6,7 @@
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
         "react/jsx-filename-extension": ["off"],
+        "react/jsx-one-expression-per-line": ["off"],
         "linebreak-style": ["off"],
         "jsx-a11y/accessible-emoji": ["off"],
         "no-undef": ["warn"],

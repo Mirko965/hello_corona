@@ -8,13 +8,20 @@ export const topTen = (countryData, x, y) => {
     .slice(0, 10)
 }
 
-export const dataGraph = (data, subData) => {
-  if (!isEmpty(data)) {
-    return Object.entries(data[subData]).map(([key, value]) => {
+export const dataGraph = (data, country, subData) => {
+  const countries = data.filter((item) => item.country === country)[0]
+  if (!isEmpty(countries)) {
+    return Object.entries(countries.timeline[subData]).map(([key, value]) => {
       return { x: key, y: value }
     })
   }
 }
+
+/* export const dataGraph = (data, subData) => {
+  return data.map((item) => {
+    console.log(item.timeline)
+  })
+} */
 
 export const exYu = (data, countries, x, y) => {
   const countriesData = countries.map(name => {

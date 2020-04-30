@@ -14,11 +14,7 @@ const SelectListGroup = (
   blur,
 ) => {
   const selectOption = options.map((option, index) => {
-    if (index === 0) {
-      return (
-        <option className='form__input--option-first' key={index} value=''>{option}</option>
-      )
-    }
+    console.log(option)
     return (
       <option className='form__input--option' key={index} value={option}>{option}</option>
     )

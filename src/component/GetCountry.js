@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect, useState, useCallback } from 'react';
 import {
   LineSeries,
@@ -8,17 +7,17 @@ import {
   VerticalBarSeries,
   HorizontalGridLines
 } from 'react-vis';
-import isEmpty from '../form_module/component/isEmpty';
-import { getAllWorldData, getAllByCountry, getHistoricalAll, getHistoricalByCountry, getCountryData } from '../api/FetchData';
+import moment from 'moment'
+import { getAllWorldData, getHistoricalAll, getHistoricalByCountryAll, getCountryData } from '../api/FetchData';
 import GoogleMap from './GoogleMap';
 import SelectListGroup from '../form_module/input/SelectListGroup';
 import { topTen, dataGraph, exYu } from '../utils/topTen'
 
 const GetCountry = () => {
-  const [values, setValues] = useState({ country: '' })
+  const [values, setValues] = useState({ country: 'All World' })
   const [country, setCountry] = useState({})
-  const [allWorldHistory, setAllWorldHistory] = useState({})
   const [countryData, setCountryData] = useState([])
+  const [countriesHistory, setCountriesHistory] = useState([])
   const [options, setOptions] = useState({})
 
 
@@ -36,45 +35,26 @@ const GetCountry = () => {
     }
   })
   const exYuCountries = ['Serbia', 'Croatia', 'Bosnia', 'Slovenia', 'Macedonia', 'Montenegro']
-  const countriesArray = ['All World'].concat(countryData.map(item => item.country))
+  const countriesArray = countryData.map(item => item.country)
 
   const fetchData = useCallback(async () => {
-    let getAllWorldHistory = await getHistoricalAll()
-    let getAllWorld = await getAllWorldData()
-    let geo = await getCountryData()
+    let allWorldData = await getAllWorldData()
+    let countriesData = await getCountryData()
+    let allWorldHistoryData = await getHistoricalAll()
+    let countryHistory = await getHistoricalByCountryAll()
 
-    setAllWorldHistory(getAllWorldHistory)
-
-    if (isEmpty(values)) {
-      setCountry(getAllWorld)
-      setAllWorldHistory(getAllWorldHistory)
-      setCountryData(geo)
-      setOptions({
-        center: {
-          lat: 0,
-          lng: 0
-        },
-        zoom: 2,
-        mapTypeId: 'roadmap'
-      })
-    } else if (!isEmpty(values)) {
-      getAllWorld = await getAllByCountry(values)
-      let getCountryHistory = await getHistoricalByCountry(values)
-      setCountry(getAllWorld)
-
-      const { country } = getCountryHistory
-      const { cases, deaths, recovered } = getCountryHistory
-      setAllWorldHistory({ country, cases, deaths, recovered })
-      setOptions({
-        center: {
-          lat: getAllWorld.countryInfo.lat,
-          lng: getAllWorld.countryInfo.long
-        },
-        zoom: 6,
-        mapTypeId: 'roadmap'
-      })
-    }
-  }, [values])
+    setCountryData([{ ...allWorldData, countryInfo: { lat: 0, long: 0 }, country: 'All World' }].concat(countriesData))
+    setCountriesHistory([{ timeline: allWorldHistoryData, country: 'All World', province: null }].concat(countryHistory))
+    setCountry(allWorldData)
+    setOptions({
+      center: {
+        lat: 0,
+        lng: 0
+      },
+      zoom: 2,
+      mapTypeId: 'roadmap'
+    })
+  }, [])
 
   useEffect(() => {
     fetchData()
@@ -82,53 +62,49 @@ const GetCountry = () => {
 
   const handleChange = (event) => {
     event.preventDefault()
-    setValues({ ...values, country: event.target.value })
+    const country = event.target.value || 'All World'
+    countryData.filter(item => {
+      if (item.country === country) {
+        setCountry(item)
+        if (country === 'All World') {
+          setOptions({
+            center: {
+              lat: 0,
+              lng: 0
+            },
+            zoom: 2,
+            mapTypeId: 'roadmap'
+          })
+        } else {
+          setOptions({
+            center: {
+              lat: item.countryInfo.lat,
+              lng: item.countryInfo.long
+            },
+            zoom: 6,
+            mapTypeId: 'roadmap'
+          })
+        }
+      }
+      setValues({ ...values, country })
+    })
   }
-  const onClick = (marker) => {
+  const onClickMarker = (marker) => {
     const title = marker.getTitle()
     setValues({ ...values, country: title })
-  }
-
-  const content = (link) => {
-    return `
-            <div>
-              <h3><b>${link.title}</b></h3>
-              <p><b>Cases</b>: ${link.cases}</p>
-              <p><b>Today Cases</b>: ${link.todayCases}</p>
-              <p><b>Deaths</b>: ${link.deaths}</p>
-              <p><b>Today Deaths</b>: ${link.todayDeaths}</p>
-              <p><b>Recovered</b>: ${link.recovered}</p>
-            </div>
-           `
-  }
-  const addMarkers = (map) => {
-    if (links) {
-      return links.map((link) => {
-        const infoWindow = new window.google.maps.InfoWindow({
-          content: content(link)
-        });
-        const marker = new window.google.maps.Marker({
-          map,
-          position: link.coords,
-          title: link.title,
-          icon: 'http://maps.google.com/mapfiles/ms/icons/blue.png'
+    countryData.filter(item => {
+      if (item.country === title) {
+        setCountry(item)
+        setOptions({
+          center: {
+            lat: item.countryInfo.lat,
+            lng: item.countryInfo.long
+          },
+          zoom: 6,
+          mapTypeId: 'roadmap'
         })
-        map.setCenter(options.center);
-        map.setZoom(options.zoom);
-        marker.addListener('click', () => {
-          onClick(marker)
-        });
-        marker.addListener('mouseover', () => {
-          // map.setZoom(6);
-          // map.setCenter(marker.getPosition());
-          
-          infoWindow.open(map, marker);
-        })
-        marker.addListener('mouseout', () => {
-          infoWindow.close();
-        })
-      })
-    }
+      }
+    })
   }
 
   return (
@@ -137,11 +113,9 @@ const GetCountry = () => {
         <GoogleMap
           links={links}
           options={options}
-          onClick={() => onClick()}
-          addMarkers={addMarkers}
+          onClick={onClickMarker}
         />
       </div>
-
       <div className='country'>
         <div className='dataText'>
           <form>
@@ -155,6 +129,7 @@ const GetCountry = () => {
             )}
             </h3>
           </form>
+          <p><b>Updated: </b>{moment(country.updated).format('L LT').toString()}</p>
           <p><b>Cases</b>: {country.cases}</p>
           <p><b>Today Cases</b>: {country.todayCases}</p>
           <p><b>Deaths</b>: {country.deaths}</p>
@@ -177,7 +152,7 @@ const GetCountry = () => {
               stroke='red'
             >
               <LineSeries
-                data={dataGraph(allWorldHistory, 'deaths')}
+                data={dataGraph(countriesHistory, values.country, 'deaths')}
                 size={2}
               />
               <XAxis
@@ -211,7 +186,7 @@ const GetCountry = () => {
               // stroke='red'
             >
               <LineSeries
-                data={dataGraph(allWorldHistory, 'cases')}
+                data={dataGraph(countriesHistory, values.country, 'cases')}
                 size={2}
               />
               <XAxis
@@ -236,7 +211,7 @@ const GetCountry = () => {
                 }}
               />
               <LineSeries
-                data={dataGraph(allWorldHistory, 'recovered')}
+                data={dataGraph(countriesHistory, values.country, 'recovered')}
                 size={2}
               />
               <XAxis
@@ -273,7 +248,7 @@ const GetCountry = () => {
             width={330}
             height={200}
           >
-            <VerticalBarSeries data={topTen(countryData, 'country', 'deaths')} />
+            <VerticalBarSeries data={topTen(countryData, 'country', 'deaths').slice(1)} />
             <HorizontalGridLines />
             <XAxis
               tickLabelAngle={-38}
