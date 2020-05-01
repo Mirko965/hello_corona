@@ -16,22 +16,6 @@ export const getHistoricalAll = async () => {
     console.log(e)
   }
 }
-export const getAllByCountry = async (values) => {
-  const getCountry = await axios.get(`https://corona.lmao.ninja/v2/countries/${values.country}`)
-  try {
-    return getCountry.data
-  } catch (e) {
-    console.log(e)
-  }
-}
-export const getHistoricalByCountry = async (values) => {
-  const getCountry = await axios.get(`https://corona.lmao.ninja/v2/historical/${values.country}`)
-  try {
-    return getCountry.data.timeline
-  } catch (e) {
-    console.log(e)
-  }
-}
 export const getHistoricalByCountryAll = async () => {
   const getCountry = await axios.get('https://corona.lmao.ninja/v2/historical')
   try {

@@ -15,13 +15,6 @@
   color: #120202;
 }
 
-.App-cases {
-  display: flex;
-  justify-content: space-between;
-  text-align: left;
-  padding: 0;
-}
-
 .maps {
   height: 40rem;
   padding: 1rem 2rem;
@@ -30,7 +23,6 @@
 .mine {
   display: flex;
   flex-direction: column;
-  flex: 100%;
   background: rgb(205, 205, 205);
   background: linear-gradient(0deg, rgba(205, 205, 205, 1) 0%, rgba(243, 243, 243, 1) 24%, rgba(255, 255, 255, 1) 49%);
 }
@@ -38,7 +30,6 @@
 .topTen {
   display: flex;
   flex-direction: row;
-  flex: max-content;
   justify-content: space-around;
 }
 
@@ -93,8 +84,3 @@ option {
   padding: 1rem;
 }
 
-.rv-xy-plot__axis__tick__text {
-  fill: #6b6b76;
-  font-size: 14px;
-  padding: 2rem;
-}

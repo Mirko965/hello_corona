@@ -12,16 +12,11 @@ export const dataGraph = (data, country, subData) => {
   const countries = data.filter((item) => item.country === country)[0]
   if (!isEmpty(countries)) {
     return Object.entries(countries.timeline[subData]).map(([key, value]) => {
-      return { x: key, y: value }
+      const val = value / 1000
+      return { x: key, y: val }
     })
   }
 }
-
-/* export const dataGraph = (data, subData) => {
-  return data.map((item) => {
-    console.log(item.timeline)
-  })
-} */
 
 export const exYu = (data, countries, x, y) => {
   const countriesData = countries.map(name => {

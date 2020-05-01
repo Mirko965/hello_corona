@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react'
 
 const GOOGLE_MAP_API_KEY = 'AIzaSyBASSvwAm6ZV_X_6dnnCsgMycITw3a2xn8';
 
-const GoogleMap = ({ options, links, onClick }) => {
+const GoogleMap = ({ options, markers, handleMarker }) => {
   const googleMapRef = useRef();
   const [map, setMap] = useState()
 
@@ -23,8 +23,8 @@ const GoogleMap = ({ options, links, onClick }) => {
            `
   }
   const addMarkers = (map) => {
-    if (links) {
-      return links.map(link => {
+    if (markers) {
+      return markers.map(link => {
         const infoWindow = new window.google.maps.InfoWindow({
           content: content(link)
         });
@@ -36,7 +36,7 @@ const GoogleMap = ({ options, links, onClick }) => {
         })
         map.setCenter(options.center);
         map.setZoom(options.zoom);
-        marker.addListener('click', () => onClick(marker));
+        marker.addListener('click', () => handleMarker(marker));
         marker.addListener('mouseover', () => {
           // map.setZoom(6);
           // map.setCenter(marker.getPosition());

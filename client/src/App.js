@@ -12,9 +12,7 @@ function App() {
         <header className="App-header">
           Hello corona
         </header>
-        <div className='App-cases'>
-          <GetCountry />
-        </div>
+        <GetCountry />
       </div>
     </Provider>
   );

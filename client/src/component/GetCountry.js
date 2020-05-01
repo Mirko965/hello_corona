@@ -5,7 +5,7 @@ import {
   XYPlot,
   YAxis,
   VerticalBarSeries,
-  HorizontalGridLines
+  HorizontalGridLines, DiscreteColorLegend
 } from 'react-vis';
 import moment from 'moment'
 import { getAllWorldData, getHistoricalAll, getHistoricalByCountryAll, getCountryData } from '../api/FetchData';
@@ -21,7 +21,7 @@ const GetCountry = () => {
   const [options, setOptions] = useState({})
 
 
-  const links = countryData.map(item => {
+  const markers = countryData.map(item => {
     if (typeof item.countryInfo.lat === 'number' && typeof item.countryInfo.long === 'number') {
       return {
         coords: { lat: item.countryInfo.lat, lng: item.countryInfo.long },
@@ -63,7 +63,7 @@ const GetCountry = () => {
   const handleChange = (event) => {
     event.preventDefault()
     const country = event.target.value || 'All World'
-    countryData.filter(item => {
+    return countryData.filter(item => {
       if (item.country === country) {
         setCountry(item)
         if (country === 'All World') {
@@ -89,7 +89,7 @@ const GetCountry = () => {
       setValues({ ...values, country })
     })
   }
-  const onClickMarker = (marker) => {
+  const handleMarker = (marker) => {
     const title = marker.getTitle()
     setValues({ ...values, country: title })
     countryData.filter(item => {
@@ -106,16 +106,17 @@ const GetCountry = () => {
       }
     })
   }
-
+  console.log(window.screen.availWidth)
+  const width = window.screen.availWidth >= 1680 ? 700 : 400
   return (
     <div className='mine'>
-      <div className='maps'>
+     {/* <div className='maps'>
         <GoogleMap
-          links={links}
+          markers={markers}
           options={options}
-          onClick={onClickMarker}
+          handleMarker={handleMarker}
         />
-      </div>
+      </div>*/}
       <div className='country'>
         <div className='dataText'>
           <form>
@@ -144,17 +145,21 @@ const GetCountry = () => {
         </div>
         <div className='graphs'>
           <div className='deaths'>
+            <DiscreteColorLegend height={200} width={300} items={['deaths']} />
             <XYPlot
               height={250}
-              width={700}
+              width={width}
               xType="ordinal"
               stackBy="y"
               stroke='red'
             >
+              
               <LineSeries
                 data={dataGraph(countriesHistory, values.country, 'deaths')}
                 size={2}
+                color='green'
               />
+              
               <XAxis
                 tickLabelAngle={-75}
                 tickPadding={2}
@@ -165,14 +170,15 @@ const GetCountry = () => {
                   text: { stroke: 'none', fill: '#6b6b76', fontWeight: 600 }
                 }}
               />
+              
               <YAxis
-                tickSize={1}
+                tickSize={3}
                 tickPadding={2}
-                title="death"
+                title="death X 1000"
                 style={{
                   line: { stroke: '#011517' },
                   ticks: { stroke: '#ADDDE1' },
-                  text: { stroke: 'none', fill: '#6b6b76', fontWeight: 600 }
+                  text: { stroke: 'none', fill: '#6b6b76', fontWeight: 300 }
                 }}
               />
             </XYPlot>
@@ -180,7 +186,7 @@ const GetCountry = () => {
           <div className='cases'>
             <XYPlot
               height={250}
-              width={700}
+              width={width}
               xType="ordinal"
               stackBy="y"
               // stroke='red'
@@ -200,10 +206,10 @@ const GetCountry = () => {
                 }}
               />
               <YAxis
-                tickSize={3}
+                tickSize={2}
                 tickPadding={8}
-                tickLabelAngle={-75}
-                title="Cases"
+                //tickLabelAngle={-75}
+                title="Cases X 1000"
                 style={{
                   line: { stroke: '#011517' },
                   ticks: { stroke: '#ADDDE1' },
@@ -225,10 +231,10 @@ const GetCountry = () => {
                 }}
               />
               <YAxis
-                tickSize={3}
+                tickSize={2}
                 tickPadding={8}
-                tickLabelAngle={-75}
-                title="Cases"
+                //tickLabelAngle={-75}
+                //title="Cases"
                 style={{
                   line: { stroke: '#011517' },
                   ticks: { stroke: '#ADDDE1' },
