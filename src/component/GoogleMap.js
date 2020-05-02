@@ -1,7 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
 
-const GOOGLE_MAP_API_KEY = 'AIzaSyBASSvwAm6ZV_X_6dnnCsgMycITw3a2xn8';
-
 const GoogleMap = ({ options, links }) => {
   const googleMapRef = useRef();
   const [map, setMap] = useState()
