@@ -4,7 +4,7 @@
   "description": "express server for react-app",
   "main": "index.js",
   "scripts": {
-    "start": "babel-watch -L index.js",
+    "start": "node index.js",
     "heroku-postbuild": "cd ./client && npm install && npm run build"
   },
   "engines": {

@@ -1,5 +1,5 @@
-import express from 'express'
-import path from 'path'
+const express = require('express')
+const path = require('path')
 
 const server = express()
 
@@ -13,5 +13,4 @@ server.get('/ping', (req, res) => {
   res.send('PONG-Hello express')
 })
 
-export  default server
-
+module.exports = server

@@ -1,7 +1,6 @@
-import '@babel/polyfill';
-import server from "./server";
+const server = require('./server')
 
 const port = process.env.PORT || 5000
 server.listen(port, () => {
-  console.log(`server listen on port ${port}${__dirname}`)
+  console.log(`server listen on port ${port}`)
 })
