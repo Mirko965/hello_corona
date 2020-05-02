@@ -110,13 +110,13 @@ const GetCountry = () => {
   const width = window.screen.availWidth >= 1680 ? 700 : 400
   return (
     <div className='mine'>
-     {/* <div className='maps'>
+      <div className='maps'>
         <GoogleMap
           markers={markers}
           options={options}
           handleMarker={handleMarker}
         />
-      </div>*/}
+      </div>
       <div className='country'>
         <div className='dataText'>
           <form>
