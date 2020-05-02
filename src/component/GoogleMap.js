@@ -1,14 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react'
 
-<<<<<<< HEAD
-=======
-const GOOGLE_MAP_API_KEY = 'AIzaSyBASSvwAm6ZV_X_6dnnCsgMycITw3a2xn8';
-
->>>>>>> origin/master
 const GoogleMap = ({ options, links }) => {
   const googleMapRef = useRef();
   const [map, setMap] = useState()
-
+  
   const mapStyles = {
     width: '100%',
     height: '40rem',
@@ -52,7 +47,7 @@ const GoogleMap = ({ options, links }) => {
       })
     }
   }
-
+  
   // useEffect Hook
   useEffect(() => {
     const createGoogleMap = () => setMap(new window.google.maps.Map(googleMapRef.current, options));
@@ -66,7 +61,7 @@ const GoogleMap = ({ options, links }) => {
     createGoogleMap()
   }, [options]);
   if (map) addMarkers(map)
-
+  
   return (
     <div
       ref={googleMapRef}
