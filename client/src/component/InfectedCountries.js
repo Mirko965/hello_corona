@@ -85,11 +85,11 @@ const InfectedCountries = () => {
   return (
     <main>
       <div className='maps'>
-       {/* <GoogleMap
+        <GoogleMap
           markers={markers}
           options={options}
           handleMarker={handleMarker}
-        />*/}
+        />
       </div>
       <div className='country'>
         <CountriesList
@@ -116,8 +116,6 @@ const InfectedCountries = () => {
         />
       </div>
     </main>
-
-
   )
 }
 
