@@ -1,7 +1,6 @@
 .App {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
 }
 
 .App-header {
@@ -15,72 +14,5 @@
   color: #120202;
 }
 
-.maps {
-  height: 40rem;
-  padding: 1rem 2rem;
-}
 
-.mine {
-  display: flex;
-  flex-direction: column;
-  background: rgb(205, 205, 205);
-  background: linear-gradient(0deg, rgba(205, 205, 205, 1) 0%, rgba(243, 243, 243, 1) 24%, rgba(255, 255, 255, 1) 49%);
-}
-
-.topTen {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-select {
-  font-size: 16px;
-  border: 1px solid white;
-  -moz-text-align-last: center;
-  text-rendering: optimizeSpeed;
-  cursor: pointer;
-  text-align-last: left;
-}
-
-select:hover {
-  border-bottom: 1px solid darkred;
-}
-
-select:focus {
-  outline-color: white;
-}
-
-.input__select {
-  color: hsl(340, 90%, 4%);
-  text-align: start;
-  font-size: 18px;
-  font-weight: bold;
-  padding-right: 1rem;
-}
-
-option {
-  text-align: right;
-}
-
-.country {
-  display: flex;
-  flex-direction: row;
-  flex: max-content;
-  justify-content: space-around;
-  margin-bottom: 2rem;
-}
-
-.dataText {
-  padding-top: 1rem;
-}
-
-.graphs {
-  display: flex;
-  flex-direction: column;
-  padding-top: 1rem;
-}
-
-.barChart {
-  padding: 1rem;
-}
 

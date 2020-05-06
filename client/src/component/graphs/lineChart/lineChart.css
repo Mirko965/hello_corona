@@ -1,0 +1,45 @@
+.allWorldCasesAndRecovered {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  padding: 0;
+}
+
+.lineChart {
+  display: flex;
+  flex: 1 0 auto;
+  margin: 0;
+  padding: 0 1rem;
+  width: 800px;
+  height: 250px;
+}
+
+@supports (display: flex) {
+  @media all and (max-width: 1280px) and (min-width: 861px) {
+    .lineChart {
+      display: flex;
+      flex: 1 0 auto;
+    }
+  }
+}
+
+@supports (display: flex) {
+  @media all and (max-width: 860px) and (min-width: 421px) and (orientation: landscape){
+    .lineChart {
+      width: 600px;
+      height: 250px;
+    }
+    .dataText {
+      padding-left: 4rem;
+    }
+  }
+}
+
+@supports (display: flex) {
+  @media all and (max-width: 420px) and (orientation: portrait){
+    .lineChart {
+      width: 350px;
+      height: 250px;
+    }
+  }
+}

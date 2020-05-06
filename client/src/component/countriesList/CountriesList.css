@@ -1,0 +1,83 @@
+.country {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 2rem;
+}
+
+select {
+  font-size: 16px;
+  border: 1px solid gray;
+  -moz-text-align-last: center;
+  text-rendering: optimizeSpeed;
+  cursor: pointer;
+  text-align-last: left;
+}
+
+select:hover {
+  border-bottom: 1px solid darkred;
+}
+
+select:focus {
+  outline-color: white;
+}
+
+.input__select {
+  color: hsl(340, 90%, 4%);
+  text-align: start;
+  font-size: 18px;
+  font-weight: bold;
+  padding-right: 1rem;
+}
+
+option {
+  text-align: right;
+}
+
+@media all and (max-width: 1260px) and (min-width: 861px) {
+  .country {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 2rem;
+    justify-content: center;
+    align-self: center;
+  }
+}
+
+@supports (display: flex) {
+  @media all and (max-width: 860px) and (min-width: 421px) and (orientation: landscape) {
+    .country {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      padding: 0;
+      justify-content: center;
+      align-self: center;
+    }
+  }
+}
+
+
+@supports (display: flex) {
+  @media all and (max-width: 420px) and (orientation: portrait){
+    .country {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      margin: 0;
+      padding: 0;
+    }
+    .dataText {
+      padding: 0;
+    }
+    .dataText h3 {
+      text-align: center;
+    }
+    .dataText > p {
+      text-align: center;
+    }
+  }
+}

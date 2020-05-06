@@ -1,0 +1,7 @@
+main {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background: rgb(205, 205, 205);
+  background: linear-gradient(0deg, rgba(205, 205, 205, 1) 0%, rgba(243, 243, 243, 1) 24%, rgba(255, 255, 255, 1) 49%);
+}

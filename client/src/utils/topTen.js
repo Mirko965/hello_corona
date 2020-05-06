@@ -2,20 +2,38 @@ import isEmpty from '../form_module/component/isEmpty';
 
 export const topTen = (countryData, x, y) => {
   return countryData.map(countries => {
-    return { x: countries[x], y: countries[y] }
+    return { country: countries[x], [y]: countries[y] }
   })
-    .sort((a, b) => b.y - a.y)
+    .sort((a, b) => b[y] - a[y])
     .slice(0, 10)
 }
 
-export const dataGraph = (data, country, subData) => {
-  const countries = data.filter((item) => item.country === country)[0]
+export const dataGraph = (data, count) => {
+  const countries = data.filter((item) => item.country === count)[0]
   if (!isEmpty(countries)) {
-    return Object.entries(countries.timeline[subData]).map(([key, value]) => {
-      const val = value / 1000
-      return { x: key, y: val }
-    })
+    const { cases, deaths, recovered } = countries.timeline
+    const casesArr = Object.entries(cases).map(([key,value]) => {
+      return { date: key, cases: value }
+  })
+  const deathsArr = Object.entries(deaths).map(([key,value]) => {
+    return { date: key, deaths: value }
+  })
+  const recoveredArr = Object.entries(recovered).map(([key,value]) => {
+    return { date: key, recovered: value }
+  })
+    casesArr.map(item =>
+      deathsArr.map(item2 =>
+        recoveredArr.map(item3 => {
+          if (item.date === item2.date && item.date === item3.date){
+            return Object.assign(item,item2,item3)
+          }
+          return null
+        })
+      )
+    )
+    return [...casesArr]
   }
+
 }
 
 export const exYu = (data, countries, x, y) => {
