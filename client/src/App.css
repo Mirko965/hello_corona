@@ -14,5 +14,19 @@
   color: #120202;
 }
 
+.App-main {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background: rgb(205, 205, 205);
+  background: linear-gradient(0deg, rgba(205, 205, 205, 1) 0%, rgba(243, 243, 243, 1) 24%, rgba(255, 255, 255, 1) 49%);
+}
+
+.App-footer {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0 1rem;
+  background: rgb(205, 205, 205);
+}
 
 

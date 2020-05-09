@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import './InfectedCountries.css'
+//import './InfectedCountries.css'
 import { getAllWorldData, getHistoricalAll, getHistoricalByCountryAll, getCountryData } from '../api/FetchData';
 import GoogleMap from "./googleMap";
 import CountriesList from "./countriesList";
@@ -83,7 +83,7 @@ const InfectedCountries = () => {
     })
   }
   return (
-    <main>
+    <>
       <div className='maps'>
         <GoogleMap
           markers={markers}
@@ -115,7 +115,7 @@ const InfectedCountries = () => {
           exYuCountries={exYuCountries}
         />
       </div>
-    </main>
+    </>
   )
 }
 

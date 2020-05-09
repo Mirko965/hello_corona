@@ -1,13 +1,11 @@
 .maps {
   height: 40rem;
   padding: 1rem 2rem;
-  background-color: #47d3d9;
 }
 
 @media all and (max-width: 1260px){
   .maps {
     height: 40rem;
     padding: 0;
-    background-color: #47d3d9;
   }
 }
