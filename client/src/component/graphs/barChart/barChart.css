@@ -1,8 +1,8 @@
 .barChart {
   display: flex;
   flex-direction: column;
-  padding: 0;
-  width: 400px;
+  width: 380px;
+  margin-bottom: 1rem;
 }
 
 .topTen {
@@ -11,46 +11,79 @@
   justify-content: space-around;
 }
 
-@media all and (max-width: 1280px) and (min-width: 861px){
-  .barChart {
-    width: 300px;
-  }
-  .topTen {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-}
 
 @supports (display: flex) {
+  @media all and (max-width: 1440px) and (min-width: 820px) {
 
-}@media all and (max-width: 860px) and (min-width: 421px) and (orientation: landscape){
-  .barChart {
-    width: 600px;
-  }
-  .topTen {
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-  }
-  .topTen h3 {
-    text-align: center;
-  }
-}
-
-
-@supports (display: flex) {
-  @media all and (max-width: 420px) and (orientation: portrait){
     .barChart {
-      width: 350px;
+      width: 500px;
+      padding: 0 3rem;
+      align-items: center;
     }
     .topTen {
       display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content:flex-start;
+    }
+
+  }
+}
+
+@supports (display: flex) {
+  @media all and (max-width: 819px) and (min-width: 640px) {
+
+    .barChart {
+      width: 580px;
+    }
+    .topTen {
+      display: flex;
+      flex-wrap: wrap;
       flex-direction: column;
-      align-self: start;
+      align-self: center;
     }
     .topTen h3 {
       text-align: center;
     }
+
+  }
+}
+
+
+@supports (display: flex) {
+  @media all and (max-width: 639px) and (min-width: 421px) and (orientation: landscape) {
+
+    .barChart {
+      width: 500px;
+    }
+    .topTen {
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+    }
+    .topTen h3 {
+      text-align: center;
+    }
+
+
+  }
+}
+
+@supports (display: flex) {
+  @media all and (max-width: 420px) and (orientation: portrait){
+
+    .barChart {
+      width: 340px;
+      align-self: center;
+    }
+    .topTen {
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+    }
+    .topTen h3 {
+      text-align: center;
+    }
+
   }
 }

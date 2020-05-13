@@ -1,10 +1,15 @@
 .country {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: nowrap;
   margin: 0;
   padding: 2rem;
+}
+
+.dataText {
+  display: flex;
+  flex-direction: column;
 }
 
 select {
@@ -36,33 +41,76 @@ option {
   text-align: right;
 }
 
-@media all and (max-width: 1260px) and (min-width: 861px) {
-  .country {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 0 2rem;
-    justify-content: center;
-    align-self: center;
+@supports (display: flex) {
+  @media all and (max-width: 1440px) and (min-width: 769px) {
+
+    .country {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      padding: 0 2rem;
+      align-self: start;
+    }
+
   }
 }
 
 @supports (display: flex) {
-  @media all and (max-width: 860px) and (min-width: 421px) and (orientation: landscape) {
+  @media all and (max-width: 768px) and (min-width: 640px) {
+
     .country {
-      display: flex;
-      flex-direction: column;
       flex-wrap: wrap;
       padding: 0;
-      justify-content: center;
-      align-self: center;
+      flex-direction: column;
+      align-items: center;
     }
+
+    .dataText {
+      align-items: center;
+      padding: 0;
+      width: 600px;
+    }
+
+    .input__select {
+      color: hsl(340, 90%, 4%);
+      text-align: start;
+      font-size: 16px;
+      font-weight: inherit;
+      padding-right: 0;
+    }
+
+  }
+}
+
+
+@supports (display: flex) {
+  @media all and (max-width: 639px) and (min-width: 421px)and (orientation: portrait)  {
+
+    .country {
+      flex-wrap: wrap;
+      padding: 0;
+    }
+
+    .dataText {
+      padding: 0;
+      width: 400px;
+    }
+
+    .input__select {
+      color: hsl(340, 90%, 4%);
+      text-align: start;
+      font-size: 16px;
+      font-weight: inherit;
+      padding-right: 0;
+    }
+
   }
 }
 
 
 @supports (display: flex) {
   @media all and (max-width: 420px) and (orientation: portrait){
+
     .country {
       display: flex;
       flex-direction: column;
@@ -70,14 +118,29 @@ option {
       margin: 0;
       padding: 0;
     }
+
     .dataText {
       padding: 0;
+      width: 100%;
     }
+
+    .input__select {
+      color: hsl(340, 90%, 4%);
+      font-size: 16px;
+      font-weight: lighter;
+      padding-right: 1rem;
+      width: 300px;
+    }
+
     .dataText h3 {
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
+
     .dataText > p {
       text-align: center;
     }
+
   }
 }

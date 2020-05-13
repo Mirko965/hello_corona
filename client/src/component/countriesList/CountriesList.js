@@ -16,8 +16,7 @@ const CountriesList = ({values, countriesArray, country, handleChange}) => {
   return (
     <div className='dataText'>
       <form>
-        <h3><b>Country</b>: {countries}
-        </h3>
+        <h3>Country {countries}</h3>
       </form>
       <p><b>Updated: </b>{moment(country.updated).format('L LT').toString()}</p>
       <p><b>Cases</b>: {country.cases}</p>

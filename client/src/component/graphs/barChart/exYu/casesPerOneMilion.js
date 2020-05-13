@@ -1,5 +1,5 @@
 import React from "react";
-import {Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import {Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import {exYu} from "../../../../utils/topTen";
 
 const ExYuCasesPerOneMillion = ({countryData, exYuCountries}) => {
@@ -9,10 +9,9 @@ const ExYuCasesPerOneMillion = ({countryData, exYuCountries}) => {
       <ResponsiveContainer width={'100%'} height={250} >
       <BarChart data={exYu(countryData, exYuCountries, 'country', 'casesPerOneMillion')}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="country" />
+        <XAxis dataKey="country" interval={0} height={80} angle={-35} textAnchor="end"/>
         <YAxis />
         <Tooltip />
-        <Legend />
         <Bar dataKey="casesPerOneMillion" fill="#8884d8" />
       </BarChart>
       </ResponsiveContainer>

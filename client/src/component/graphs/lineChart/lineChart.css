@@ -14,32 +14,55 @@
   height: 250px;
 }
 
+
 @supports (display: flex) {
-  @media all and (max-width: 1280px) and (min-width: 861px) {
+  @media all and (max-width: 1440px) and (min-width: 820px) {
+
     .lineChart {
       display: flex;
       flex: 1 0 auto;
+      width: 750px;
     }
+
   }
 }
 
 @supports (display: flex) {
-  @media all and (max-width: 860px) and (min-width: 421px) and (orientation: landscape){
+  @media all and (max-width: 819px) and (min-width: 640px) {
+
     .lineChart {
-      width: 600px;
+      width: 550px;
       height: 250px;
     }
     .dataText {
-      padding-left: 4rem;
+      padding-left: 0;
     }
+
+  }
+}
+
+
+@supports (display: flex) {
+  @media all and (max-width: 639px) and (min-width: 421px) and (orientation: landscape) {
+
+    .lineChart {
+      width: 400px;
+      height: 250px;
+    }
+    .dataText {
+      padding-left: 0;
+    }
+
   }
 }
 
 @supports (display: flex) {
   @media all and (max-width: 420px) and (orientation: portrait){
+
     .lineChart {
-      width: 350px;
+      width: 320px;
       height: 250px;
     }
+
   }
 }
